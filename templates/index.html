@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aspirasi Mahasiswa BEM</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Aspirasi Mahasiswa BEM</h1>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('index') }}">
+            <div class="form-group">
+                <label for="kategori">Kategori Aspirasi:</label>
+                <select name="kategori" id="kategori">
+                    <option value="akademik">Akademik</option>
+                    <option value="fasilitas">Fasilitas</option>
+                    <option value="pelayanan">Pelayanan</option>
+                    <option value="lainnya" selected>Lainnya</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="pesan">Tuliskan Aspirasi Anda:</label>
+                <textarea name="pesan" id="pesan" rows="5" required placeholder="Tulis aspirasi, kritik, atau saran Anda di sini..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">Kirim Aspirasi</button>
+        </form>
+    </div>
+</body>
+</html>
